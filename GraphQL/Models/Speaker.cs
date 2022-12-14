@@ -4,7 +4,7 @@ namespace GraphQL.Models;
 
 public sealed class Speaker
 {
-    public long Id { get; init; }
+    public int Id { get; init; }
 
     [Required]
     [StringLength(200)]

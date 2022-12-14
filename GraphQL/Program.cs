@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 
+using GraphQL.DataLoader;
 using GraphQL.Persistance;
 using GraphQL.Services;
+using GraphQL.Types;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,10 @@ builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(options => opti
 
 builder.Services.AddGraphQLServer()
                 .AddQueryType<Query>()
-                .AddMutationType<Mutation>();
+                .AddMutationType<Mutation>()
+                .AddType<SpeakerType>()
+                .AddDataLoader<SpeakerByIdDataLoader>()
+                .AddDataLoader<SessionByIdDataLoader>();
 
 var app = builder.Build();
 
